@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.items.mapper.ItemsMapper">
+
+    <resultMap type="Items" id="ItemsResult">
+        <result property="id"    column="id"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="category"    column="category"    />
+        <result property="description"    column="description"    />
+        <result property="locationFound"    column="location_found"    />
+        <result property="dateFound"    column="date_found"    />
+        <result property="status"    column="status"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="userId"    column="user_id"    />
+        <result property="image"    column="image"    />
+    </resultMap>
+
+    <sql id="selectItemsVo">
+        select id, item_name, category, description, location_found, date_found, status, created_at, updated_at, user_id, image from tb_items
+    </sql>
+
+    <select id="selectItemsList" parameterType="Items" resultMap="ItemsResult">
+        <include refid="selectItemsVo"/>
+        <where>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="locationFound != null  and locationFound != ''"> and location_found like concat('%', #{locationFound}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectItemsById" parameterType="Long" resultMap="ItemsResult">
+        <include refid="selectItemsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertItems" parameterType="Items" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_items
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">item_name,</if>
+            <if test="category != null and category != ''">category,</if>
+            <if test="description != null">description,</if>
+            <if test="locationFound != null and locationFound != ''">location_found,</if>
+            <if test="dateFound != null">date_found,</if>
+            <if test="status != null">status,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="image != null">image,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">#{itemName},</if>
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="description != null">#{description},</if>
+            <if test="locationFound != null and locationFound != ''">#{locationFound},</if>
+            <if test="dateFound != null">#{dateFound},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="image != null">#{image},</if>
+        </trim>
+    </insert>
+
+    <update id="updateItems" parameterType="Items">
+        update tb_items
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">item_name = #{itemName},</if>
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="locationFound != null and locationFound != ''">location_found = #{locationFound},</if>
+            <if test="dateFound != null">date_found = #{dateFound},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="image != null">image = #{image},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteItemsById" parameterType="Long">
+        delete from tb_items where id = #{id}
+    </delete>
+
+    <delete id="deleteItemsByIds" parameterType="String">
+        delete from tb_items where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

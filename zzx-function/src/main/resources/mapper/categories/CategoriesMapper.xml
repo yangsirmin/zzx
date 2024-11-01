@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.categories.mapper.CategoriesMapper">
+    
+    <resultMap type="Categories" id="CategoriesResult">
+        <result property="id"    column="id"    />
+        <result property="categoryName"    column="category_name"    />
+    </resultMap>
+
+    <sql id="selectCategoriesVo">
+        select id, category_name from tb_categories
+    </sql>
+
+    <select id="selectCategoriesList" parameterType="Categories" resultMap="CategoriesResult">
+        <include refid="selectCategoriesVo"/>
+        <where>  
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCategoriesById" parameterType="Long" resultMap="CategoriesResult">
+        <include refid="selectCategoriesVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCategories" parameterType="Categories" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">category_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">#{categoryName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCategories" parameterType="Categories">
+        update tb_categories
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">category_name = #{categoryName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCategoriesById" parameterType="Long">
+        delete from tb_categories where id = #{id}
+    </delete>
+
+    <delete id="deleteCategoriesByIds" parameterType="String">
+        delete from tb_categories where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
