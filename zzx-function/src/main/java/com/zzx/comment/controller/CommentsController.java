@@ -26,13 +26,13 @@ import com.zzx.common.core.page.TableDataInfo;
 
 /**
  * 用户评论Controller
- * 
+ *
  * @author ybc
- * @date 2024-10-18
+ * @date 2024-11-04
  */
 @RestController
 @Api(tags = "用户评论")
-@RequestMapping("/comment/comments")
+@RequestMapping("/comment/comment")
 public class CommentsController extends BaseController
 {
     @Autowired
@@ -42,7 +42,7 @@ public class CommentsController extends BaseController
      * 查询用户评论列表
      */
     @ApiOperation("查询用户评论列表")
-    @PreAuthorize("@ss.hasPermi('comment:comments:list')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:list')")
     @GetMapping("/list")
     public TableDataInfo list(Comments comments)
     {
@@ -55,7 +55,7 @@ public class CommentsController extends BaseController
      * 导出用户评论列表
      */
     @ApiOperation("导出用户评论列表")
-    @PreAuthorize("@ss.hasPermi('comment:comments:export')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:export')")
     @Log(title = "用户评论", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Comments comments)
@@ -69,7 +69,7 @@ public class CommentsController extends BaseController
      * 获取用户评论详细信息
      */
     @ApiOperation("获取用户评论详细信息")
-    @PreAuthorize("@ss.hasPermi('comment:comments:query')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -80,7 +80,7 @@ public class CommentsController extends BaseController
      * 新增用户评论
      */
     @ApiOperation("新增用户评论")
-    @PreAuthorize("@ss.hasPermi('comment:comments:add')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:add')")
     @Log(title = "用户评论", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Comments comments)
@@ -92,7 +92,7 @@ public class CommentsController extends BaseController
      * 修改用户评论
      */
     @ApiOperation("修改用户评论")
-    @PreAuthorize("@ss.hasPermi('comment:comments:edit')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:edit')")
     @Log(title = "用户评论", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Comments comments)
@@ -104,9 +104,9 @@ public class CommentsController extends BaseController
      * 删除用户评论
      */
     @ApiOperation("删除用户评论")
-    @PreAuthorize("@ss.hasPermi('comment:comments:remove')")
+    @PreAuthorize("@ss.hasPermi('comment:comment:remove')")
     @Log(title = "用户评论", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(commentsService.deleteCommentsByIds(ids));

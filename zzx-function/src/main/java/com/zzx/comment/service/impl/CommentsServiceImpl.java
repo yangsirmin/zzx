@@ -9,19 +9,19 @@ import com.zzx.comment.service.ICommentsService;
 
 /**
  * 用户评论Service业务层处理
- * 
+ *
  * @author ybc
- * @date 2024-10-18
+ * @date 2024-11-04
  */
 @Service
-public class CommentsServiceImpl implements ICommentsService 
+public class CommentsServiceImpl implements ICommentsService
 {
     @Autowired
     private CommentsMapper commentsMapper;
 
     /**
      * 查询用户评论
-     * 
+     *
      * @param id 用户评论主键
      * @return 用户评论
      */
@@ -33,7 +33,7 @@ public class CommentsServiceImpl implements ICommentsService
 
     /**
      * 查询用户评论列表
-     * 
+     *
      * @param comments 用户评论
      * @return 用户评论
      */
@@ -45,7 +45,7 @@ public class CommentsServiceImpl implements ICommentsService
 
     /**
      * 新增用户评论
-     * 
+     *
      * @param comments 用户评论
      * @return 结果
      */
@@ -57,7 +57,7 @@ public class CommentsServiceImpl implements ICommentsService
 
     /**
      * 修改用户评论
-     * 
+     *
      * @param comments 用户评论
      * @return 结果
      */
@@ -69,7 +69,7 @@ public class CommentsServiceImpl implements ICommentsService
 
     /**
      * 批量删除用户评论
-     * 
+     *
      * @param ids 需要删除的用户评论主键
      * @return 结果
      */
@@ -81,7 +81,7 @@ public class CommentsServiceImpl implements ICommentsService
 
     /**
      * 删除用户评论信息
-     * 
+     *
      * @param id 用户评论主键
      * @return 结果
      */
