@@ -2,6 +2,7 @@ package com.zzx.items.mapper;
 
 import java.util.List;
 import com.zzx.items.domain.Items;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 物品管理Mapper接口
@@ -58,4 +59,27 @@ public interface ItemsMapper
      * @return 结果
      */
     public int deleteItemsByIds(Long[] ids);
+
+    /**
+     * 根据种类名称查询是否有关联物品
+     * @param category
+     * @return
+     */
+    @Select("select count(id) from ybc_zzx.tb_items where category = #{category}")
+    int selectByCategoriesName(String category);
+
+
+    /**
+     * 根据多个种类名称查询是否有关联物品
+     * @param categoryNames
+     * @return
+     */
+    int selectByCategoriesNames(String[] categoryNames);
+
+    /**
+     * 根据地点名称查询是否有关联物品
+     * @param localationsNames
+     * @return
+     */
+    int selectByLocationsNames(String[] localationsNames);
 }

@@ -9,9 +9,9 @@ import com.zzx.common.core.domain.BaseEntity;
 
 /**
  * 用户评论对象 tb_comments
- * 
+ *
  * @author ybc
- * @date 2024-10-18
+ * @date 2024-11-04
  */
 public class Comments extends BaseEntity
 {
@@ -19,9 +19,6 @@ public class Comments extends BaseEntity
 
     /** 评论ID，自动增长 */
     private Long id;
-
-    /** 关联的物品ID */
-    private Long itemId;
 
     /** 评论内容 */
     @Excel(name = "评论内容")
@@ -33,64 +30,53 @@ public class Comments extends BaseEntity
     private Date createdAt;
 
     /** 更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updatedAt;
 
     /** 外键关联用户表 */
     private Long userId;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setItemId(Long itemId) 
-    {
-        this.itemId = itemId;
-    }
-
-    public Long getItemId() 
-    {
-        return itemId;
-    }
-    public void setContent(String content) 
+    public void setContent(String content)
     {
         this.content = content;
     }
 
-    public String getContent() 
+    public String getContent()
     {
         return content;
     }
-    public void setCreatedAt(Date createdAt) 
+    public void setCreatedAt(Date createdAt)
     {
         this.createdAt = createdAt;
     }
 
-    public Date getCreatedAt() 
+    public Date getCreatedAt()
     {
         return createdAt;
     }
-    public void setUpdatedAt(Date updatedAt) 
+    public void setUpdatedAt(Date updatedAt)
     {
         this.updatedAt = updatedAt;
     }
 
-    public Date getUpdatedAt() 
+    public Date getUpdatedAt()
     {
         return updatedAt;
     }
-    public void setUserId(Long userId) 
+    public void setUserId(Long userId)
     {
         this.userId = userId;
     }
 
-    public Long getUserId() 
+    public Long getUserId()
     {
         return userId;
     }
@@ -98,12 +84,11 @@ public class Comments extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("itemId", getItemId())
-            .append("content", getContent())
-            .append("createdAt", getCreatedAt())
-            .append("updatedAt", getUpdatedAt())
-            .append("userId", getUserId())
-            .toString();
+                .append("id", getId())
+                .append("content", getContent())
+                .append("createdAt", getCreatedAt())
+                .append("updatedAt", getUpdatedAt())
+                .append("userId", getUserId())
+                .toString();
     }
 }

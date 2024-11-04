@@ -1,6 +1,9 @@
 package com.zzx.categories.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.zzx.items.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzx.categories.mapper.CategoriesMapper;
@@ -18,6 +21,9 @@ public class CategoriesServiceImpl implements ICategoriesService
 {
     @Autowired
     private CategoriesMapper categoriesMapper;
+
+    @Autowired
+    private ItemsMapper itemsMapper;
 
     /**
      * 查询物品种类
@@ -76,6 +82,16 @@ public class CategoriesServiceImpl implements ICategoriesService
     @Override
     public int deleteCategoriesByIds(Long[] ids)
     {
+        ArrayList<Categories> categoriesList = new ArrayList<>();
+        categoriesList = categoriesMapper.selectListByIds(ids);
+        String[] categoryNames = new String[categoriesList.size()];
+        for (int i = 0; i < categoriesList.size(); i++) {
+            categoryNames[i] = categoriesList.get(i).getCategoryName();
+        }
+        int count = itemsMapper.selectByCategoriesNames(categoryNames);
+        if (count > 0){
+            throw new RuntimeException("有关联物品，请误删除");
+        }
         return categoriesMapper.deleteCategoriesByIds(ids);
     }
 

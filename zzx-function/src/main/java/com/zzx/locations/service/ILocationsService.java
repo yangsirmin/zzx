@@ -5,15 +5,15 @@ import com.zzx.locations.domain.Locations;
 
 /**
  * 领取地点Service接口
- * 
+ *
  * @author ybc
- * @date 2024-10-18
+ * @date 2024-11-04
  */
-public interface ILocationsService 
+public interface ILocationsService
 {
     /**
      * 查询领取地点
-     * 
+     *
      * @param id 领取地点主键
      * @return 领取地点
      */
@@ -21,7 +21,7 @@ public interface ILocationsService
 
     /**
      * 查询领取地点列表
-     * 
+     *
      * @param locations 领取地点
      * @return 领取地点集合
      */
@@ -29,7 +29,7 @@ public interface ILocationsService
 
     /**
      * 新增领取地点
-     * 
+     *
      * @param locations 领取地点
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface ILocationsService
 
     /**
      * 修改领取地点
-     * 
+     *
      * @param locations 领取地点
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface ILocationsService
 
     /**
      * 批量删除领取地点
-     * 
+     *
      * @param ids 需要删除的领取地点主键集合
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface ILocationsService
 
     /**
      * 删除领取地点信息
-     * 
+     *
      * @param id 领取地点主键
      * @return 结果
      */

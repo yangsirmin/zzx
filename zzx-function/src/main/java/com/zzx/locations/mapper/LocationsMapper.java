@@ -58,4 +58,11 @@ public interface LocationsMapper
      * @return 结果
      */
     public int deleteLocationsByIds(Long[] ids);
+
+    /**
+     * 根据ids查询地点名称
+     * @param ids
+     * @return
+     */
+    String[] selectLocationsByIds(Long[] ids);
 }

@@ -36,6 +36,18 @@
         <include refid="selectItemsVo"/>
         where id = #{id}
     </select>
+    <select id="selectByCategoriesNames" resultType="java.lang.Integer">
+        select count(id) from tb_items where category in
+            <foreach item="categoryName" collection="array" open="(" separator="," close=")">
+                #{categoryName}
+            </foreach>
+    </select>
+    <select id="selectByLocationsNames" resultType="java.lang.Integer">
+        select count(id) from tb_items where location_found in
+            <foreach item="locationName" collection="array" open="(" separator="," close=")">
+                #{locationName}
+            </foreach>
+    </select>
 
     <insert id="insertItems" parameterType="Items" useGeneratedKeys="true" keyProperty="id">
         insert into tb_items

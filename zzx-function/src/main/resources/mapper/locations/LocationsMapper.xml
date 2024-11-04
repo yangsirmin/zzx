@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectLocationsVo"/>
         where id = #{id}
     </select>
+    <select id="selectLocationsByIds">
+        select name from tb_locations where id in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
     <insert id="insertLocations" parameterType="Locations" useGeneratedKeys="true" keyProperty="id">
         insert into tb_locations

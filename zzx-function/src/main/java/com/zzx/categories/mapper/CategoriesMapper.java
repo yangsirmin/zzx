@@ -1,5 +1,6 @@
 package com.zzx.categories.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.zzx.categories.domain.Categories;
 
@@ -58,4 +59,6 @@ public interface CategoriesMapper
      * @return 结果
      */
     public int deleteCategoriesByIds(Long[] ids);
+
+    ArrayList<Categories> selectListByIds(Long[] ids);
 }

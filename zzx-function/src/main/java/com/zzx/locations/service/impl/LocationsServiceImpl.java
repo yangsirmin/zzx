@@ -1,6 +1,8 @@
 package com.zzx.locations.service.impl;
 
 import java.util.List;
+
+import com.zzx.items.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzx.locations.mapper.LocationsMapper;
@@ -9,19 +11,21 @@ import com.zzx.locations.service.ILocationsService;
 
 /**
  * 领取地点Service业务层处理
- * 
+ *
  * @author ybc
- * @date 2024-10-18
+ * @date 2024-11-04
  */
 @Service
-public class LocationsServiceImpl implements ILocationsService 
+public class LocationsServiceImpl implements ILocationsService
 {
     @Autowired
     private LocationsMapper locationsMapper;
 
+    @Autowired
+    private ItemsMapper itemsMapper;
     /**
      * 查询领取地点
-     * 
+     *
      * @param id 领取地点主键
      * @return 领取地点
      */
@@ -33,7 +37,7 @@ public class LocationsServiceImpl implements ILocationsService
 
     /**
      * 查询领取地点列表
-     * 
+     *
      * @param locations 领取地点
      * @return 领取地点
      */
@@ -45,7 +49,7 @@ public class LocationsServiceImpl implements ILocationsService
 
     /**
      * 新增领取地点
-     * 
+     *
      * @param locations 领取地点
      * @return 结果
      */
@@ -57,7 +61,7 @@ public class LocationsServiceImpl implements ILocationsService
 
     /**
      * 修改领取地点
-     * 
+     *
      * @param locations 领取地点
      * @return 结果
      */
@@ -69,19 +73,24 @@ public class LocationsServiceImpl implements ILocationsService
 
     /**
      * 批量删除领取地点
-     * 
+     *
      * @param ids 需要删除的领取地点主键
      * @return 结果
      */
     @Override
     public int deleteLocationsByIds(Long[] ids)
     {
+        String[] localationsNames = locationsMapper.selectLocationsByIds(ids);
+        int count = itemsMapper.selectByLocationsNames(localationsNames);
+        if (count > 0){
+            throw new RuntimeException("有关联物品，请勿删除");
+        }
         return locationsMapper.deleteLocationsByIds(ids);
     }
 
     /**
      * 删除领取地点信息
-     * 
+     *
      * @param id 领取地点主键
      * @return 结果
      */

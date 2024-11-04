@@ -24,6 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCategoriesVo"/>
         where id = #{id}
     </select>
+    <select id="selectListByIds" resultType="com.zzx.categories.domain.Categories">
+        select category_name from tb_categories where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 
     <insert id="insertCategories" parameterType="Categories" useGeneratedKeys="true" keyProperty="id">
         insert into tb_categories
@@ -53,4 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
 </mapper>
