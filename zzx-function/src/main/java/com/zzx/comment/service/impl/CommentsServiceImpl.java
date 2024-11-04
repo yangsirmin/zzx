@@ -1,6 +1,9 @@
 package com.zzx.comment.service.impl;
 
 import java.util.List;
+
+import com.zzx.common.core.domain.entity.SysUser;
+import com.zzx.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzx.comment.mapper.CommentsMapper;
@@ -19,6 +22,8 @@ public class CommentsServiceImpl implements ICommentsService
     @Autowired
     private CommentsMapper commentsMapper;
 
+    @Autowired
+    private SysUserMapper userMapper;
     /**
      * 查询用户评论
      *
@@ -40,7 +45,23 @@ public class CommentsServiceImpl implements ICommentsService
     @Override
     public List<Comments> selectCommentsList(Comments comments)
     {
-        return commentsMapper.selectCommentsList(comments);
+        List<Comments> commentsList = commentsMapper.selectCommentsList(comments);
+        Long[] userIds = new Long[commentsList.size()];
+        for (int i = 0; i < commentsList.size(); i++) {
+            userIds[i] = commentsList.get(i).getUserId();
+        }
+        //查询用户信息
+        SysUser[] users = userMapper.selectUserByIds(userIds);
+        //把用户头像和昵称设置进去
+        for (int i = 0; i < commentsList.size(); i++) {
+            for (int j = 0; j < users.length; j++) {
+                if (commentsList.get(i).getUserId().equals(users[j].getUserId())){
+                    commentsList.get(i).setNikeName(users[j].getNickName());
+                    commentsList.get(i).setAvatar(users[j].getAvatar());
+                }
+            }
+        }
+        return commentsList;
     }
 
     /**

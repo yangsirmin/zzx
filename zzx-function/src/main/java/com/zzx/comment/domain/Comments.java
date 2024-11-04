@@ -35,6 +35,16 @@ public class Comments extends BaseEntity
     /** 外键关联用户表 */
     private Long userId;
 
+    /**
+     * 用户昵称
+     */
+    private String nikeName;
+
+    /**
+     * 用户头像
+     * @param id
+     */
+    private String avatar;
     public void setId(Long id)
     {
         this.id = id;
@@ -90,5 +100,21 @@ public class Comments extends BaseEntity
                 .append("updatedAt", getUpdatedAt())
                 .append("userId", getUserId())
                 .toString();
+    }
+
+    public String getNikeName() {
+        return nikeName;
+    }
+
+    public void setNikeName(String nikeName) {
+        this.nikeName = nikeName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
