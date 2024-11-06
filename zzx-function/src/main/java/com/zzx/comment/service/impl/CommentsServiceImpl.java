@@ -3,12 +3,21 @@ package com.zzx.comment.service.impl;
 import java.util.List;
 
 import com.zzx.common.core.domain.entity.SysUser;
+import com.zzx.common.core.domain.model.LoginUser;
+import com.zzx.framework.security.context.AuthenticationContextHolder;
 import com.zzx.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.zzx.comment.mapper.CommentsMapper;
 import com.zzx.comment.domain.Comments;
 import com.zzx.comment.service.ICommentsService;
+
+import javax.annotation.Resource;
 
 /**
  * 用户评论Service业务层处理
@@ -24,6 +33,10 @@ public class CommentsServiceImpl implements ICommentsService
 
     @Autowired
     private SysUserMapper userMapper;
+
+    @Resource
+    private AuthenticationManager authenticationManager;
+
     /**
      * 查询用户评论
      *
@@ -73,6 +86,11 @@ public class CommentsServiceImpl implements ICommentsService
     @Override
     public int insertComments(Comments comments)
     {
+        Authentication authencation = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authencation.getPrincipal();
+        if (loginUser != null){
+            comments.setUserId(loginUser.getUserId());
+        }
         return commentsMapper.insertComments(comments);
     }
 
