@@ -1,5 +1,7 @@
 package com.zzx.framework.web.service;
 
+import com.zzx.system.domain.SysUserRole;
+import com.zzx.system.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.zzx.common.constant.CacheConstants;
@@ -18,6 +20,9 @@ import com.zzx.framework.manager.factory.AsyncFactory;
 import com.zzx.system.service.ISysConfigService;
 import com.zzx.system.service.ISysUserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 注册校验方法
  * 
@@ -35,6 +40,9 @@ public class SysRegisterService
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
+
     /**
      * 注册
      */
@@ -42,6 +50,7 @@ public class SysRegisterService
     {
         String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
         SysUser sysUser = new SysUser();
+        sysUser.setAvatar(UserConstants.DEFAULT_AVATAR);
         sysUser.setUserName(username);
 
         // 验证码开关
@@ -85,6 +94,14 @@ public class SysRegisterService
             else
             {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
+                // 新增用户与角色管理
+                List<SysUserRole> list = new ArrayList<SysUserRole>();
+                SysUser user = userService.selectUserByUserName(username);
+                SysUserRole ur = new SysUserRole();
+                ur.setUserId(user.getUserId());
+                ur.setRoleId(2l);
+                list.add(ur);
+                userRoleMapper.batchUserRole(list);
             }
         }
         return msg;

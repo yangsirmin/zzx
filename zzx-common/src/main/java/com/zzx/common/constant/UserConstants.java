@@ -78,4 +78,5 @@ public class UserConstants
      */
     public static final int PASSWORD_MIN_LENGTH = 5;
     public static final int PASSWORD_MAX_LENGTH = 20;
+    public static final String DEFAULT_AVATAR = "https://springboot-tlias123.oss-cn-beijing.aliyuncs.com/profile.jpg";
 }
