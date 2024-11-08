@@ -30,6 +30,7 @@
             <if test="locationFound != null  and locationFound != ''"> and location_found like concat('%', #{locationFound}, '%')</if>
             <if test="status != null "> and status = #{status}</if>
         </where>
+        ORDER BY created_at DESC
     </select>
 
     <select id="selectItemsById" parameterType="Long" resultMap="ItemsResult">

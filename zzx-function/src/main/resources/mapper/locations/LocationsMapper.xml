@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
         </where>
+        ORDER BY id DESC
     </select>
     
     <select id="selectLocationsById" parameterType="Long" resultMap="LocationsResult">

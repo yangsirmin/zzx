@@ -3,6 +3,7 @@ package com.zzx.common.core.domain;
 import java.util.HashMap;
 import java.util.Objects;
 import com.zzx.common.constant.HttpStatus;
+import com.zzx.common.enums.AppHttpCodeEnum;
 import com.zzx.common.utils.StringUtils;
 
 /**
@@ -170,6 +171,13 @@ public class AjaxResult extends HashMap<String, Object>
         return new AjaxResult(code, msg, null);
     }
 
+    /**
+     * 返回错误信息
+     */
+    public static AjaxResult error(AppHttpCodeEnum codeEnum)
+    {
+        return new AjaxResult(codeEnum.getCode(), codeEnum.getErrorMessage(), null);
+    }
     /**
      * 是否为成功消息
      *

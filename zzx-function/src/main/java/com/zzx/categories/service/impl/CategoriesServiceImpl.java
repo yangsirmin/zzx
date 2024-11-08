@@ -3,6 +3,8 @@ package com.zzx.categories.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zzx.common.enums.AppHttpCodeEnum;
+import com.zzx.handle.CustomException;
 import com.zzx.items.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +92,8 @@ public class CategoriesServiceImpl implements ICategoriesService
         }
         int count = itemsMapper.selectByCategoriesNames(categoryNames);
         if (count > 0){
-            throw new RuntimeException("有关联物品，请误删除");
+            // TODO
+            throw new RuntimeException(AppHttpCodeEnum.MATERIAL_ITEMS_DEL_FAIL.getErrorMessage());
         }
         return categoriesMapper.deleteCategoriesByIds(ids);
     }
