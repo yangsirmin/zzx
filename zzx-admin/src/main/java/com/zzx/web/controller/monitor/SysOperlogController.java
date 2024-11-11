@@ -2,6 +2,9 @@ package com.zzx.web.controller.monitor;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +28,7 @@ import com.zzx.system.service.ISysOperLogService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "日志记录")
 @RequestMapping("/monitor/operlog")
 public class SysOperlogController extends BaseController
 {
@@ -32,6 +36,7 @@ public class SysOperlogController extends BaseController
     private ISysOperLogService operLogService;
 
     @PreAuthorize("@ss.hasPermi('monitor:operlog:list')")
+    @ApiOperation("日志列表")
     @GetMapping("/list")
     public TableDataInfo list(SysOperLog operLog)
     {
@@ -51,6 +56,7 @@ public class SysOperlogController extends BaseController
     }
 
     @Log(title = "操作日志", businessType = BusinessType.DELETE)
+    @ApiOperation("日志删除")
     @PreAuthorize("@ss.hasPermi('monitor:operlog:remove')")
     @DeleteMapping("/{operIds}")
     public AjaxResult remove(@PathVariable Long[] operIds)
@@ -60,6 +66,7 @@ public class SysOperlogController extends BaseController
 
     @Log(title = "操作日志", businessType = BusinessType.CLEAN)
     @PreAuthorize("@ss.hasPermi('monitor:operlog:remove')")
+    @ApiOperation("日志清空")
     @DeleteMapping("/clean")
     public AjaxResult clean()
     {

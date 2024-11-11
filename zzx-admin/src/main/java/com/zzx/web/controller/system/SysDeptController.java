@@ -1,6 +1,9 @@
 package com.zzx.web.controller.system;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +31,7 @@ import com.zzx.system.service.ISysDeptService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "部门信息")
 @RequestMapping("/system/dept")
 public class SysDeptController extends BaseController
 {
@@ -38,6 +42,7 @@ public class SysDeptController extends BaseController
      * 获取部门列表
      */
     @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @ApiOperation("部门列表")
     @GetMapping("/list")
     public AjaxResult list(SysDept dept)
     {
@@ -49,6 +54,7 @@ public class SysDeptController extends BaseController
      * 查询部门列表（排除节点）
      */
     @PreAuthorize("@ss.hasPermi('system:dept:list')")
+    @ApiOperation("部门列表")
     @GetMapping("/list/exclude/{deptId}")
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
     {
@@ -61,6 +67,7 @@ public class SysDeptController extends BaseController
      * 根据部门编号获取详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:dept:query')")
+    @ApiOperation("根据部门编号获取详细信息")
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable Long deptId)
     {
@@ -73,6 +80,7 @@ public class SysDeptController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:dept:add')")
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
+    @ApiOperation("新增部门")
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDept dept)
     {
@@ -89,6 +97,7 @@ public class SysDeptController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:dept:edit')")
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
+    @ApiOperation("修改部门")
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDept dept)
     {
@@ -115,6 +124,7 @@ public class SysDeptController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:dept:remove')")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
+    @ApiOperation("删除部门")
     @DeleteMapping("/{deptId}")
     public AjaxResult remove(@PathVariable Long deptId)
     {

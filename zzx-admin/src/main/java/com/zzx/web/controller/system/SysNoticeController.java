@@ -1,6 +1,9 @@
 package com.zzx.web.controller.system;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +29,7 @@ import com.zzx.system.service.ISysNoticeService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "公告信息")
 @RequestMapping("/system/notice")
 public class SysNoticeController extends BaseController
 {
@@ -36,6 +40,7 @@ public class SysNoticeController extends BaseController
      * 获取通知公告列表
      */
     @PreAuthorize("@ss.hasPermi('system:notice:list')")
+    @ApiOperation("公告列表")
     @GetMapping("/list")
     public TableDataInfo list(SysNotice notice)
     {
@@ -48,6 +53,7 @@ public class SysNoticeController extends BaseController
      * 根据通知公告编号获取详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:notice:query')")
+    @ApiOperation("根据通知公告编号获取详细信息")
     @GetMapping(value = "/{noticeId}")
     public AjaxResult getInfo(@PathVariable Long noticeId)
     {
@@ -58,6 +64,7 @@ public class SysNoticeController extends BaseController
      * 新增通知公告
      */
     @PreAuthorize("@ss.hasPermi('system:notice:add')")
+    @ApiOperation("新增通知公告")
     @Log(title = "通知公告", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysNotice notice)
@@ -71,6 +78,7 @@ public class SysNoticeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:notice:edit')")
     @Log(title = "通知公告", businessType = BusinessType.UPDATE)
+    @ApiOperation("修改通知公告")
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysNotice notice)
     {
@@ -83,6 +91,7 @@ public class SysNoticeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:notice:remove')")
     @Log(title = "通知公告", businessType = BusinessType.DELETE)
+    @ApiOperation("删除通知公告")
     @DeleteMapping("/{noticeIds}")
     public AjaxResult remove(@PathVariable Long[] noticeIds)
     {

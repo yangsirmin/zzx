@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +32,7 @@ import com.zzx.system.service.ISysUserOnlineService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "在线用户监控")
 @RequestMapping("/monitor/online")
 public class SysUserOnlineController extends BaseController
 {
@@ -39,6 +43,7 @@ public class SysUserOnlineController extends BaseController
     private RedisCache redisCache;
 
     @PreAuthorize("@ss.hasPermi('monitor:online:list')")
+    @ApiOperation("日志列表")
     @GetMapping("/list")
     public TableDataInfo list(String ipaddr, String userName)
     {
@@ -74,6 +79,7 @@ public class SysUserOnlineController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('monitor:online:forceLogout')")
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
+    @ApiOperation("强退用户")
     @DeleteMapping("/{tokenId}")
     public AjaxResult forceLogout(@PathVariable String tokenId)
     {

@@ -2,6 +2,9 @@ package com.zzx.web.controller.system;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +31,7 @@ import com.zzx.system.service.ISysPostService;
  * @author ruoyi
  */
 @RestController
+@Api(tags = "岗位信息")
 @RequestMapping("/system/post")
 public class SysPostController extends BaseController
 {
@@ -38,6 +42,7 @@ public class SysPostController extends BaseController
      * 获取岗位列表
      */
     @PreAuthorize("@ss.hasPermi('system:post:list')")
+    @ApiOperation("岗位列表")
     @GetMapping("/list")
     public TableDataInfo list(SysPost post)
     {
@@ -60,6 +65,7 @@ public class SysPostController extends BaseController
      * 根据岗位编号获取详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:post:query')")
+    @ApiOperation("根据岗位编号获取详细信息")
     @GetMapping(value = "/{postId}")
     public AjaxResult getInfo(@PathVariable Long postId)
     {
@@ -71,6 +77,7 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:add')")
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
+    @ApiOperation("新增岗位")
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysPost post)
     {
@@ -90,6 +97,7 @@ public class SysPostController extends BaseController
      * 修改岗位
      */
     @PreAuthorize("@ss.hasPermi('system:post:edit')")
+    @ApiOperation("修改岗位")
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysPost post)
@@ -111,6 +119,7 @@ public class SysPostController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:post:remove')")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
+    @ApiOperation("删除岗位")
     @DeleteMapping("/{postIds}")
     public AjaxResult remove(@PathVariable Long[] postIds)
     {
@@ -121,6 +130,7 @@ public class SysPostController extends BaseController
      * 获取岗位选择框列表
      */
     @GetMapping("/optionselect")
+    @ApiOperation("获取岗位选择框列表")
     public AjaxResult optionselect()
     {
         List<SysPost> posts = postService.selectPostAll();

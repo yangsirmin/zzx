@@ -85,6 +85,7 @@ public class LocationsServiceImpl implements ILocationsService
         String[] localationsNames = locationsMapper.selectLocationsByIds(ids);
         int count = itemsMapper.selectByLocationsNames(localationsNames);
         if (count > 0){
+            // TODO
             throw new RuntimeException(AppHttpCodeEnum.MATERIAL_ITEMS_DEL_FAIL.getErrorMessage());
         }
         return locationsMapper.deleteLocationsByIds(ids);
