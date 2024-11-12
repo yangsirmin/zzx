@@ -64,7 +64,7 @@
 
 ### 在线演示
 
-演示地址：
+演示地址：www.ybczzx.fun
 
 ### 项目本地启动
 
@@ -86,7 +86,7 @@
 
 - 修改zzx-admin模块下的yml文件，如MySQL，Redis等，并启动ZhaoZhaoXiaApplication
 
-- 启动前端项目
+- 启动前端项目(前端源码：https://github.com/yangsirmin/zzx-vue3.git)
 
 - 在MySQL中找到sys_user表，里面有用户信息，密码均为134679
 
