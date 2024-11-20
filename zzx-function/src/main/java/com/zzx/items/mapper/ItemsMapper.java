@@ -82,4 +82,11 @@ public interface ItemsMapper
      * @return
      */
     int selectByLocationsNames(String[] localationsNames);
+
+    /**
+     * 通过ids批量查询物品
+     * @param ids
+     * @return
+     */
+    int[] selectItemsByIds(Long[] ids);
 }

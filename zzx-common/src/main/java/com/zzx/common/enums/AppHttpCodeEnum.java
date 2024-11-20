@@ -27,7 +27,9 @@ public enum AppHttpCodeEnum {
     NO_OPERATOR_AUTH(3000,"无权限操作"),
     NEED_ADMIND(3001,"需要管理员权限"),
     //有关联物品，请误删除
-    MATERIAL_ITEMS_DEL_FAIL(4000, "有关联物品，请误删除");
+    MATERIAL_ITEMS_DEL_FAIL(4000, "有关联物品，请误删除"),
+    //请勿随意删除他人的物品
+    PLEASE_DEL_OR_EDIT_ITEMS(4001, "请勿随意删除他人的物品");
 
     int code;
     String errorMessage;

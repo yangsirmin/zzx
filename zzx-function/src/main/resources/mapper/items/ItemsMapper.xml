@@ -29,6 +29,7 @@
             <if test="category != null  and category != ''"> and category = #{category}</if>
             <if test="locationFound != null  and locationFound != ''"> and location_found like concat('%', #{locationFound}, '%')</if>
             <if test="status != null "> and status = #{status}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
         </where>
         ORDER BY created_at DESC
     </select>
@@ -47,6 +48,12 @@
         select count(id) from tb_items where location_found in
             <foreach item="locationName" collection="array" open="(" separator="," close=")">
                 #{locationName}
+            </foreach>
+    </select>
+    <select id="selectItemsByIds" resultType="java.lang.Integer">
+        select user_id from tb_items where id in
+            <foreach item="id" collection="array" open="(" separator="," close=")">
+                #{id}
             </foreach>
     </select>
 

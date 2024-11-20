@@ -52,6 +52,19 @@ public class ItemsController extends BaseController
     }
 
     /**
+     * 查询用户物品管理列表
+     */
+    @ApiOperation("查询物品管理列表")
+    @PreAuthorize("@ss.hasPermi('items:items:list')")
+    @GetMapping("user/list")
+    public TableDataInfo userList(Items items)
+    {
+        startPage();
+        List<Items> list = itemsService.selectUserItemsList(items);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出物品管理列表
      */
     @ApiOperation("导出物品管理列表")

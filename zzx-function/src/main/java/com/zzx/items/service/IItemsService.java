@@ -58,4 +58,11 @@ public interface IItemsService
      * @return 结果
      */
     public int deleteItemsById(Long id);
+
+    /**
+     * 查询用户物品列表
+     * @param items
+     * @return
+     */
+    List<Items> selectUserItemsList(Items items);
 }
