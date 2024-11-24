@@ -1,5 +1,6 @@
 package com.zzx.items.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zzx.common.core.domain.entity.SysUser;
@@ -67,6 +68,9 @@ public class ItemsServiceImpl implements IItemsService
     {
         LoginUser sysUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         items.setUserId(sysUser.getUserId());
+        if (items.getDateFound() == null){
+            items.setDateFound(new Date());
+        }
         return itemsMapper.insertItems(items);
     }
 
