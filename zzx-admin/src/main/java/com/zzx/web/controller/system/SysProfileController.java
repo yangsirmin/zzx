@@ -1,5 +1,7 @@
 package com.zzx.web.controller.system;
 
+import org.dromara.x.file.storage.core.FileInfo;
+import org.dromara.x.file.storage.core.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,9 @@ import com.zzx.common.utils.file.MimeTypeUtils;
 import com.zzx.framework.web.service.TokenService;
 import com.zzx.system.service.ISysUserService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * 个人信息 业务处理
  * 
@@ -37,6 +42,9 @@ public class SysProfileController extends BaseController
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private FileStorageService fileStorageService;//注入实列
 
     /**
      * 个人信息
@@ -121,13 +129,17 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = getLoginUser();
-            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION);
-            if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
+//            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file, MimeTypeUtils.IMAGE_EXTENSION);
+            String objectName = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "/";
+            FileInfo fileInfo = fileStorageService.of(file)
+                    .setPath(objectName)
+                    .upload();
+            if (userService.updateUserAvatar(loginUser.getUsername(), fileInfo.getUrl()))
             {
                 AjaxResult ajax = AjaxResult.success();
-                ajax.put("imgUrl", avatar);
+                ajax.put("imgUrl", fileInfo.getUrl());
                 // 更新缓存用户头像
-                loginUser.getUser().setAvatar(avatar);
+                loginUser.getUser().setAvatar(fileInfo.getUrl());
                 tokenService.setLoginUser(loginUser);
                 return ajax;
             }
