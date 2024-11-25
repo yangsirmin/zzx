@@ -1,6 +1,6 @@
 ### 平台介绍
 
-找找侠是基于若依框架开发的一款帮助人们更方便的寻找到丢失物的失物招领平台。
+找找侠是基于若依框架开发的一款帮助人们更方便的寻找到丢失物的失物招领平台，包含网页端与移动端。
 
 - 前端采用Vue、Element UI。
 
@@ -62,12 +62,38 @@
 
 4.用户评论：用户可评论对平台使用感想
 
+5.我的发布：管理用户自己的发布物品
+
 ### 在线演示
 
 演示地址：www.ybczzx.fun
 
-### 项目本地启动
+### 演示图片
 
+#### 网页端
+
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image.png" alt="image" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image1.png" alt="image" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image2.png" alt="image" style="width:30%;"><br>
+
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image3.png" alt="image" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image4.png" alt="image" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/image5.png" alt="image" style="width:30%;">
+
+#### 移动端
+
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160432_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160447_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160206_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%;"><br>
+
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160218_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160213_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160227_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%;"><br>
+
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_160234_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%; margin-right: 1%;">
+<img src="找找侠+9fe93663-3a68-4299-8869-0a433bfec364/Screenshot_20241125_161436_uni.fun.ybczzx.jpg" alt="Screenshot" style="width:30%;">
+
+### 项目本地启动
 #### 项目环境
 
 - jdk 11
@@ -86,7 +112,7 @@
 
 - 修改zzx-admin模块下的yml文件，如MySQL，Redis等，并启动ZhaoZhaoXiaApplication
 
-- 启动前端项目(前端源码：https://github.com/yangsirmin/zzx-vue3.git)
+- 启动前端项目
 
 - 在MySQL中找到sys_user表，里面有用户信息，密码均为134679
 
